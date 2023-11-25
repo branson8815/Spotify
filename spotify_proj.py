@@ -159,5 +159,6 @@ def audio_features_dictionary(top_track_info):
 
 # get_audio_features(token, top_track_info['Dreaming About You'])
 
+top_audio_features  = (audio_features_dictionary(top_track_info))
 
-print(audio_features_dictionary(top_track_info))
+print(top_audio_features['Dreaming About You'])
