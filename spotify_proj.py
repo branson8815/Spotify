@@ -162,3 +162,7 @@ def audio_features_dictionary(top_track_info):
 top_audio_features  = (audio_features_dictionary(top_track_info))
 
 print(top_audio_features['Dreaming About You'])
+
+print(top_audio_features)
+
+
