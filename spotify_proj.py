@@ -3,6 +3,7 @@ import os
 import base64
 from requests import post, get
 import json
+from flask import Flask, render_template, request, jsonify
 
 
 load_dotenv()
@@ -10,7 +11,7 @@ load_dotenv()
 client_id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET")
 
-# print(client_id, client_secret)
+
 
 
 def get_token():
@@ -89,14 +90,11 @@ def get_artists_top_tracks(token, artist_id):
     query_url = url + query
     result = get(query_url, headers=headers)
     json_result = json.loads(result.content)
-    return json_result
+    return result
     # return json_result
 
 
-token = get_token()
-album1 = get_album_info(token, "Ye")
-# print(album1)
-album1_tracks = get_album_tracks(token, album1["id"])
+
 
 
 def print_album_songs(album_tracks):
@@ -104,8 +102,7 @@ def print_album_songs(album_tracks):
         print(idx + 1, value["name"])
 
 
-album_2 = get_album_info(token, "The College Dropout")
-album_2_tracks = get_album_tracks(token, album_2["id"])
+
 
 # print(album_2_tracks[1]["id"])
 # print_album_songs(album_2)
@@ -119,20 +116,8 @@ def song_id_dic_maker(track_info):
     return obj
 
 
-# for i, j in enumerate(album_2_tracks):
-#     print(i, j)
-
-dic1 = song_id_dic_maker(album_2_tracks)
-# print(obj)
-
-# for i in dic1:
-#     print(dic1[i])
 
 
-td = get_artist_info(token, "Target Demographic")
-print(td["id"])
-
-top_tracks = get_artists_top_tracks(token, td["id"])
 
 
 
@@ -145,7 +130,7 @@ def top_track_info(top_tracks):
 
 # print(top_tracks["tracks"][1]["name"])
 
-top_track_info = (top_track_info(top_tracks))
+
 
 # print(top_track_info)
 
@@ -159,10 +144,31 @@ def audio_features_dictionary(top_track_info):
 
 # get_audio_features(token, top_track_info['Dreaming About You'])
 
-top_audio_features  = (audio_features_dictionary(top_track_info))
 
-print(top_audio_features['Dreaming About You'])
 
-print(top_audio_features)
+
+app = Flask(__name__, static_url_path="/static")
+
+
+@app.route("/")
+def home():
+    return render_template("sample_page.html")
+
+@app.route("/form_submit", methods = ["POST"])
+def form_submit():
+    token = get_token()
+    name1 = request.form.get("name")
+    id1 = get_artist_info(token, name1)['id']
+    tracks = get_artists_top_tracks(token, id1)
+    track_info = top_track_info(tracks)
+
+    response_data = [track_info]
+    return jsonify(track_info)
+
+
+
+if __name__ == "__main__":
+    app.run(debug = True)
+
 
 

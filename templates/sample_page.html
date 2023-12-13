@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="frink.jpg">
+    <title>Music</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    
+
+
+    </script>
+</head>
+
+<body>
+    <h1 id = 'welcome'>Welcome</h1>
+    <div class = 'topnav'>
+        <a href="#start">Get Started</a>
+        <a href="#topsongs">Top Songs</a>
+        <a href="#topalbums">Top Albums</a>
+        <a href="#albuminfo">Album Info</a>
+    </div>
+      <br>
+      <br>
+      <div class = "intro">
+        <p>
+        This site will help you to get more information about your favorite
+        artists and their songs/albums. By utilizing the Spotify Web API, you can 
+        get detailed information that can help you learn more about various musicians
+        and their tracks.
+        </p> 
+
+      </div>
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+  
+    <form id = "artist_form", action = "/form_submit", method = 'post'>
+        <label class="txt" for="name">Type in an artist name to get started:</label>
+        <input type="text" name='name' id='name'>
+        <input type="submit" value='Submit' name="submit" id="submit">
+        
+        <div class='random'>
+            <h2>Top tracks are as follows</h2>
+            <ul>
+                <li>Artist 1</li>
+            </ul>
+        </div>
+    </form>
+
+    <script src="/static/js/sandbox.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>

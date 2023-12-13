@@ -1,0 +1,75 @@
+#welcome{
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+}
+
+.form1 {
+    font-weight: bold;
+    font-size: larger;
+}
+
+h2{
+    font-size: 30px;
+    color: white;
+}
+
+
+
+body {
+    background-image: url('shanghai-skyline.jpg');
+    background-size: 1500px, 1300px;
+}
+
+#tokenizer {
+    font-size: 40px;
+}
+
+.txt {
+    color: whitesmoke;
+    font-size: xx-large;
+}
+
+
+
+.intro{
+    font-size: 30px;
+    color: white;
+    text-align: center;
+    text-decoration: wavy;
+
+}
+
+.topnav {  
+    background-color: white; 
+    color:#f1f1f1; 
+    text-align: center;
+    padding:0; 
+    letter-spacing:1px; 
+    font-family: 'Source Sans Pro Topnav', sans-serif; 
+    font-size:0; 
+    top:56px; 
+    z-index:2; 
+    width:100%; 
+    white-space:nowrap; 
+    overflow:auto; 
+    scrollbar-width: 
+    none; }
+
+.topnav a{ 
+    display:inline-block; 
+    
+    width:auto;
+    margin:0!important;
+    padding:5px 15px 5px 15px !important; 
+     font-size:15px!important;
+      text-decoration: none;
+       line-height: 1.5; 
+    } 
+
+li {
+    font-size: 30px;
+    color: white;
+}
+       
