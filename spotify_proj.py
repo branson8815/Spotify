@@ -12,8 +12,6 @@ client_id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET")
 
 
-
-
 def get_token():
     auth_string = client_id + ":" + client_secret
     auth_bytes = auth_string.encode("utf-8")
@@ -56,7 +54,8 @@ def get_artist_info(token, artist_name):
     result = get(query_url, headers=headers)
     json_result = json.loads(result.content)
     # print(json_result)
-    return json_result["artists"]["items"][0]
+
+    return json_result["artists"]["items"][0]["id"]
 
 
 def get_album_tracks(token, album_id):
@@ -89,19 +88,15 @@ def get_artists_top_tracks(token, artist_id):
     query = f"/{artist_id}/top-tracks?country=US"
     query_url = url + query
     result = get(query_url, headers=headers)
-    json_result = json.loads(result.content)
-    return result
-    # return json_result
 
+    result_content = json.loads(result.content)
 
-
+    return result_content
 
 
 def print_album_songs(album_tracks):
     for idx, value in enumerate(album_tracks):
         print(idx + 1, value["name"])
-
-
 
 
 # print(album_2_tracks[1]["id"])
@@ -116,33 +111,25 @@ def song_id_dic_maker(track_info):
     return obj
 
 
-
-
-
-
-
-def top_track_info(top_tracks):
+def top_track_info(top_tracks, metric):
     result = {}
-    for song in (top_tracks["tracks"]):
-        result[f'{song['name']}'] = song['id']
+    for song in top_tracks["tracks"]:
+        result[f'{song['name']}'] = f'{metric} is {song[metric]}'
+
     return result
-# step2 = get_album_tracks(token, step1["id"])
-
-# print(top_tracks["tracks"][1]["name"])
-
-
 
 # print(top_track_info)
 
 
-def audio_features_dictionary(top_track_info):
-    audio_dict = dict()
-    for key, value in top_track_info.items():
-        audio_dict[key] = get_audio_features(token, value)
-    return audio_dict
+# def audio_features_dictionary(top_track_info):
+#     audio_dict = dict()
+#     for key, value in top_track_info.items():
+#         audio_dict[key] = get_audio_features(token, value)
+#     return audio_dict
 
 
-# get_audio_features(token, top_track_info['Dreaming About You'])
+
+
 
 
 
@@ -160,15 +147,15 @@ def form_submit():
     name1 = request.form.get("name")
     id1 = get_artist_info(token, name1)['id']
     tracks = get_artists_top_tracks(token, id1)
-    track_info = top_track_info(tracks)
 
-    response_data = [track_info]
-    return jsonify(track_info)
+    response_data = json.loads(tracks)
+    return jsonify(response_data)
 
+
+@app.route("/album_info")
+def album_link():
+    return render_template('album_info.html')
 
 
 if __name__ == "__main__":
     app.run(debug = True)
-
-
-

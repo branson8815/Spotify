@@ -72,4 +72,13 @@ li {
     font-size: 30px;
     color: white;
 }
-       
+
+
+
+#album_intro{
+    font-size: 30px;
+    color: white;
+    text-align: left;
+    text-decoration: wavy;
+
+}

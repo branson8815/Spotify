@@ -26,7 +26,9 @@ var reroute_form = function(path, formdata){
         method: 'POST',
         body: formdata
     })
-    .then(response => response.json())
+    .then(response => {
+        response.json()
+    })
     .then(
         
         data_obj => {
@@ -62,5 +64,13 @@ document.getElementById('artist_form').addEventListener('submit', function(event
     
 
 });
+
+
+document.getElementById('album_info').addEventListener('click', function(event) {
+    console.log('clicked on album info');
+    
+
+});
+
 
 
